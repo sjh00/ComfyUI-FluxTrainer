@@ -4858,7 +4858,7 @@ def get_optimizer(args, trainable_params):
 
     elif optimizer_type.endswith("schedulefree".lower()):
         if optimizer_type.lower() == "ProdigyPlusScheduleFree".lower():
-            from ..prodigyplusschedulefree.prodigy_plus_schedulefree import ProdigyPlusScheduleFree
+            from prodigyplus.prodigy_plus_schedulefree import ProdigyPlusScheduleFree
             optimizer_class = ProdigyPlusScheduleFree
             logger.info(f"use ProdigyScheduleFree optimizer | {optimizer_kwargs}")
         else:
