@@ -1386,8 +1386,16 @@ class BaseDataset(torch.utils.data.Dataset):
         if image_size[0] <= 0:
             # imagesize doesn't work for some images, so use PIL as a fallback
             try:
-                with load_image(image_path) as img:
-                    image_size = img.size
+                img_array = iio.imread(image_path)
+                if img_array.ndim == 2:
+                    height, width = img_array.shape
+                elif img_array.ndim == 3:
+                    height, width, channels = img_array.shape
+                elif img_array.ndim == 4:
+                    frame, height, width, channels = img_array.shape
+                else:
+                    raise ValueError(f"Unsupported image shape: {img_array.shape}")
+                image_size = (height, width)
             except Exception as e:
                 logger.warning(f"failed to get image size: {image_path}, error: {e}")
                 image_size = (0, 0)
