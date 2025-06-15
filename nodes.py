@@ -27,7 +27,6 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import io
-from PIL import Image
 
 import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -1320,7 +1319,7 @@ class VisualizeLoss:
         plt.close(fig)
         buf.seek(0)
 
-        image = Image.open(buf).convert('RGB')
+        image = train_util.load_image(buf)
 
         image_tensor = transforms.ToTensor()(image)
         image_tensor = image_tensor.unsqueeze(0).permute(0, 2, 3, 1).cpu().float()
