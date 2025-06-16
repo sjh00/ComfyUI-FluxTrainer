@@ -702,7 +702,6 @@ class InitFluxTraining:
         dataset_toml = toml.dumps(json.loads(dataset_config))
         
         parser = train_setup_parser()
-        flux_train_utils.add_flux_train_arguments(parser)
         
         if additional_args is not None:
             print(f"additional_args: {additional_args}")
